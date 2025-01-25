@@ -1,1 +1,10 @@
 
+DEFINE 
+---- MODEL MEASURES BEGIN ----
+MEASURE Fact_SalesTransactions[# of Orders] = Count(Fact_SalesTransactions[Transaction ID])
+MEASURE Fact_SalesTransactions[__No measures defined] = 1
+MEASURE Fact_SalesTransactions[__XL_Count Fact_SalesTransactions] = 
+MEASURE Fact_SalesTransactions[Avg Revenue Per Order] = DIVIDE([Revenue],[# of Orders])
+MEASURE Fact_SalesTransactions[Revenue] = SUM([Total Revenue])
+MEASURE Fact_SalesTransactions[Sum of Sales Channel ID] = SUM('Fact_SalesTransactions'[Sales Channel ID])
+---- MODEL MEASURES END ----
