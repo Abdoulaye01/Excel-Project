@@ -18,4 +18,4 @@
 ## Images
 
 ![Project Screenshot](Images/Excel-Dashboard-Project-Image.JPG)
-![Project Screenshot](Images/Excel-Dashboard-Project-Image-Pivot-Table.JPG)
+![Project Screenshot](Images/Excel-Dashboard-Project-Image-Pivot-Table.jpg)
