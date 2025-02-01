@@ -1,0 +1,86 @@
+Sub SalesChannelMacros()
+'
+' SalesChannelMacros Macro
+'
+
+'
+    Application.CutCopyMode = False
+    Application.CutCopyMode = False
+    ActiveWorkbook.PivotCaches.Create(SourceType:=xlExternal, SourceData:= _
+        ActiveWorkbook.Connections("ThisWorkbookDataModel"), Version:=8). _
+        CreatePivotTable TableDestination:="Pivot!R8C5", TableName:="PivotTable6", _
+        DefaultVersion:=8
+    Cells(8, 5).Select
+    With ActiveSheet.PivotTables("PivotTable6")
+        .ColumnGrand = True
+        .HasAutoFormat = True
+        .DisplayErrorString = False
+        .DisplayNullString = True
+        .EnableDrilldown = True
+        .ErrorString = ""
+        .MergeLabels = False
+        .NullString = ""
+        .PageFieldOrder = 2
+        .PageFieldWrapCount = 0
+        .PreserveFormatting = True
+        .RowGrand = True
+        .PrintTitles = False
+        .RepeatItemsOnEachPrintedPage = True
+        .TotalsAnnotation = True
+        .CompactRowIndent = 1
+        .VisualTotals = False
+        .InGridDropZones = False
+        .DisplayFieldCaptions = True
+        .DisplayMemberPropertyTooltips = True
+        .DisplayContextTooltips = True
+        .ShowDrillIndicators = True
+        .PrintDrillIndicators = False
+        .DisplayEmptyRow = False
+        .DisplayEmptyColumn = False
+        .AllowMultipleFilters = False
+        .SortUsingCustomLists = True
+        .DisplayImmediateItems = True
+        .ViewCalculatedMembers = True
+        .FieldListSortAscending = False
+        .ShowValuesRow = False
+        .CalculatedMembersInFilters = True
+        .RowAxisLayout xlCompactRow
+    End With
+    ActiveSheet.PivotTables("PivotTable6").PivotCache.RefreshOnFileOpen = False
+    ActiveSheet.PivotTables("PivotTable6").RepeatAllLabels xlRepeatLabels
+    ActiveSheet.PivotTables("PivotTable6").AddDataField ActiveSheet.PivotTables( _
+        "PivotTable6").CubeFields("[Measures].[Revenue]")
+    With ActiveSheet.PivotTables("PivotTable6").CubeFields( _
+        "[Dim_SalesChannels].[Sales Channel]")
+        .Orientation = xlRowField
+        .Position = 1
+    End With
+End Sub
+
+
+Sub RefreshData()
+    ' Refresh all data connections
+    ThisWorkbook.RefreshAll
+    MsgBox "Data has been refreshed!", vbInformation
+End Sub
+
+
+
+
+Sub DeleteSpecificPivotTable()
+    Dim ws As Worksheet
+    Dim pt As PivotTable
+    
+    ' Set your worksheet
+    Set ws = ThisWorkbook.Worksheets("Pivot")
+    
+    ' Loop through all Pivot Tables in the worksheet
+    For Each pt In ws.PivotTables
+        If pt.Name = "PivotTable2" Then ' Change "PivotTable1" to the name of the Pivot Table you want to delete
+            pt.TableRange2.Clear
+        End If
+    Next pt
+End Sub
+
+
+
